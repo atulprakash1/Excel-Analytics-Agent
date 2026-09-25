@@ -13,7 +13,7 @@ work/*
 !work/README.txt
 
 # Local tooling
-.claude/settings.local.json
+.claude/
 __pycache__/
 *.pyc
 .venv/
