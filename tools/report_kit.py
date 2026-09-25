@@ -3,7 +3,7 @@ report_kit.py - build polished, self-contained HTML reports with no extra librar
 
 Only the Python standard library is required (pandas is optional: `table()` accepts a
 DataFrame or a list of dicts). Charts are rendered as inline SVG, so the output is a
-single .html file that opens offline, prints cleanly and follows light/dark mode.
+single .html file that opens offline, prints cleanly and always renders in light mode.
 
 Typical use (from a build_report.py script):
 
@@ -90,17 +90,11 @@ def _nice_ticks(lo: float, hi: float, n: int = 4) -> list[float]:
 
 CSS = """
 :root{
+  color-scheme: light;
   --canvas:#e9edf1; --paper:#ffffff; --ink:#1c2733; --muted:#5b6b7a; --rule:#d5dbe1;
   --accent:#0e6e6b; --accent-soft:#e2f0ef; --pos:#2f7d4f; --neg:#b43c3c; --warn:#9a6412;
   --s0:#0e6e6b; --s1:#b7791f; --s2:#4a6fa5; --s3:#8a5a83; --s4:#6b7d2a;
   --zebra:#f5f7f9; --font: "Segoe UI", system-ui, -apple-system, Roboto, "Helvetica Neue", Arial, sans-serif;
-}
-@media (prefers-color-scheme: dark){
-  :root:not([data-theme="light"]){
-    --canvas:#0f141a; --paper:#18202a; --ink:#e4e9ee; --muted:#98a6b4; --rule:#2c3845;
-    --accent:#4fb3ad; --accent-soft:#16312f; --pos:#6cc08f; --neg:#e07b7b; --warn:#d9a95a;
-    --s0:#4fb3ad; --s1:#e0a94f; --s2:#86a8dc; --s3:#c595bd; --s4:#a9bd63; --zebra:#1d2631;
-  }
 }
 *{box-sizing:border-box}
 html{-webkit-text-size-adjust:100%}
@@ -156,6 +150,7 @@ ul.findings{padding-left:1.1rem;max-width:74ch} ul.findings li{margin:6px 0}
 ul.links{list-style:none;padding:0;max-width:74ch} ul.links li{margin:10px 0}
 ul.links a{color:var(--accent);font-weight:600;text-decoration:none} ul.links a:hover{text-decoration:underline}
 ul.links span{display:block;color:var(--muted);font-size:.9rem}
+td a{color:var(--accent);font-weight:600;text-decoration:none} td a:hover{text-decoration:underline}
 footer.rf{margin-top:48px;padding-top:16px;border-top:1px solid var(--rule);font-size:.85rem;color:var(--muted)}
 footer.rf h2{font-size:.95rem;color:var(--ink);margin:0 0 6px} footer.rf ul{margin:0 0 10px;padding-left:1.1rem}
 @media (max-width:700px){.page{margin:0;padding:28px 20px}.kpi{padding-left:12px}
@@ -301,10 +296,12 @@ class Report:
 
     # ---- tables
     def table(self, data, title: str = "", formats: dict | None = None, max_rows: int = 50,
-              total_row: bool = False, caption: str = "") -> "Report":
+              total_row: bool = False, caption: str = "", links: dict | None = None) -> "Report":
         """data: pandas DataFrame or list of dicts. formats: {column: callable}.
-        total_row=True styles the last row as a total."""
+        total_row=True styles the last row as a total.
+        links: {column: href_key} renders that column as a link to row[href_key]; href_key is not shown."""
         formats = formats or {}
+        links = links or {}
         if hasattr(data, "to_dict"):
             cols = [str(c) for c in data.columns]
             rows = data.to_dict("records")
@@ -312,6 +309,7 @@ class Report:
         else:
             rows = list(data)
             cols = list(rows[0].keys()) if rows else []
+        cols = [c for c in cols if c not in set(links.values())]
         truncated = len(rows) > max_rows
         if truncated:
             rows = rows[:max_rows]
@@ -341,7 +339,10 @@ class Report:
                     cls.append("num")
                     if isinstance(v, (int, float)) and v < 0:
                         cls.append("negv")
-                tds.append(f'<td class="{" ".join(cls)}">{_esc(s)}</td>')
+                cell = _esc(s)
+                if c in links and r.get(links[c]):
+                    cell = f'<a href="{_esc(r[links[c]])}">{cell}</a>'
+                tds.append(f'<td class="{" ".join(cls)}">{cell}</td>')
             tr_cls = ' class="total"' if total_row and ri == len(rows) - 1 else ""
             body.append(f"<tr{tr_cls}>{''.join(tds)}</tr>")
         cap = f"<figcaption>{_esc(title)}</figcaption>" if title else ""
@@ -390,6 +391,7 @@ class Report:
         return (
             '<!doctype html><html lang="en"><head><meta charset="utf-8">'
             '<meta name="viewport" content="width=device-width, initial-scale=1">'
+            '<meta name="color-scheme" content="light">'
             f"<title>{_esc(self.title)}</title><style>{CSS}</style></head><body>"
             f'<main class="page"><header class="rh"><h1>{_esc(self.title)}</h1>{sub}<dl>{meta_html}</dl></header>'
             f'<section class="rs">{body}</section>{self._footer}</main></body></html>')

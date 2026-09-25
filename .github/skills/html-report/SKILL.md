@@ -5,7 +5,7 @@ description: How to build a polished, self-contained HTML Treasury report with t
 # Building the HTML report
 
 [report_kit.py](../../../tools/report_kit.py): standard library only, inline SVG charts, one offline
-`.html` file that prints cleanly and supports dark mode.
+`.html` file that prints cleanly and always renders in light mode (no dark theme).
 
 ## Structure (in this order)
 1. **Title, subtitle, period** - for positions the as-of date, for flows the period.
