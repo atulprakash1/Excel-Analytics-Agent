@@ -1,0 +1,22 @@
+{
+  "schema_version": "1.0",
+  "sources": [
+    {
+      "select": "last_by_name",
+      "id": "iam_deal_inventory",
+      "pattern": "IAM_Deal_Inventory_*.xlsx",
+      "description": "IAM money-market deal inventory: Loan and Deposit deals outstanding as of the file's Reporting Date.",
+      "owner": "Treasury / IAM desk (confirm)",
+      "frequency": "monthly (confirm)",
+      "sheets": [
+        "IAM Deal Inventory"
+      ],
+      "domains": [
+        "money_market"
+      ],
+      "status": "confirmed",
+      "confirmed_by": "user",
+      "confirmed_on": "2026-09-25"
+    }
+  ]
+}

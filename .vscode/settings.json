@@ -1,0 +1,12 @@
+{
+  // Fast path: let agents run this workspace's own Python scripts without a confirmation click.
+  // Setting names can change between VS Code versions. If this has no effect, search
+  // Settings for "terminal auto approve" and add the same patterns there.
+  "chat.tools.terminal.autoApprove": {
+    "/^(?!.*\\.\\.)(?!.*[;&|`>])(python3?|py)\\s+(tools|analysis|samples)[\\\\/][\\w\\\\/.-]+\\.py(\\s|$)/": true,
+    // Knowledge changes always need a human click, even though the rule above matches.
+    "/^(python3?|py)\\s+tools[\\\\/]knowledge\\.py\\s+(approve|reject|deprecate)\\b/": false,
+    // Resetting the workspace is always a person's decision.
+    "/^(python3?|py)\\s+tools[\\\\/]reset_workspace\\.py\\b/": false
+  }
+}

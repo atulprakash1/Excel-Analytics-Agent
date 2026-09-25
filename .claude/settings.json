@@ -1,0 +1,17 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(python tools/profile_excel.py)",
+      "Bash(python -c ' *)",
+      "Bash(python tools/domains.py suggest \"IAM_Deal_Inventory_DUMMY_2026-08-01.xlsx\")",
+      "Bash(python tools/scaffold_report.py --help)",
+      "Bash(python analysis/deal_inventory_overview/analysis.py)",
+      "Bash(python tools/run_pipeline.py deal_inventory_overview)",
+      "Bash(python tools/reports.py show deal_inventory_overview)",
+      "Bash(python tools/knowledge.py lint)",
+      "Bash(python tools/reports.py index)",
+      "Bash(python tools/reports.py check)",
+      "Bash(python tools/reports.py init --help)"
+    ]
+  }
+}

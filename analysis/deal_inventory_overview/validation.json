@@ -1,0 +1,178 @@
+{
+  "report": "deal_inventory_overview",
+  "review_level": "full",
+  "validated_at": "2026-09-25T14:34:12",
+  "passed": true,
+  "n_checks": 28,
+  "n_failed": 0,
+  "results": [
+    {
+      "check": "Stock measure taken at a single as-of date",
+      "passed": true,
+      "detail": "as_of=2026-08-01",
+      "severity": "error"
+    },
+    {
+      "check": "Reconcile: Headline notional_in_ccy at 2026-08-01 vs independent recompute",
+      "passed": true,
+      "detail": "source=39,919,908,929.27 report=39,919,908,929.27 diff=0.00 (0.00%)",
+      "severity": "error"
+    },
+    {
+      "check": "Row count: Rows at the as-of date",
+      "passed": true,
+      "detail": "expected=1019 actual=1019",
+      "severity": "error"
+    },
+    {
+      "check": "Headline in a single currency, or converted",
+      "passed": true,
+      "detail": "1 currencies: ['EUR']",
+      "severity": "error"
+    },
+    {
+      "check": "Shares sum to 100%",
+      "passed": true,
+      "detail": "sum=1.0000",
+      "severity": "error"
+    },
+    {
+      "check": "Shares sum to 100%",
+      "passed": true,
+      "detail": "sum=1.0000",
+      "severity": "error"
+    },
+    {
+      "check": "Shares sum to 100%",
+      "passed": true,
+      "detail": "sum=1.0000",
+      "severity": "error"
+    },
+    {
+      "check": "Grain: ['Murex Original ID', 'Murex ID'] unique",
+      "passed": true,
+      "detail": "0 duplicate key(s)",
+      "severity": "error"
+    },
+    {
+      "check": "No nulls: Reporting Date",
+      "passed": true,
+      "detail": "0 null(s)",
+      "severity": "error"
+    },
+    {
+      "check": "No nulls: Deal Type",
+      "passed": true,
+      "detail": "0 null(s)",
+      "severity": "error"
+    },
+    {
+      "check": "No nulls: CCY",
+      "passed": true,
+      "detail": "0 null(s)",
+      "severity": "error"
+    },
+    {
+      "check": "No nulls: Maturity Date",
+      "passed": true,
+      "detail": "0 null(s)",
+      "severity": "error"
+    },
+    {
+      "check": "No nulls: Notional in CCY",
+      "passed": true,
+      "detail": "0 null(s)",
+      "severity": "error"
+    },
+    {
+      "check": "No nulls: Murex Portfolio",
+      "passed": true,
+      "detail": "0 null(s)",
+      "severity": "error"
+    },
+    {
+      "check": "No nulls: Rate in %",
+      "passed": true,
+      "detail": "0 null(s)",
+      "severity": "error"
+    },
+    {
+      "check": "Reconcile: by_deal_type: Notional sums to headline",
+      "passed": true,
+      "detail": "source=39,919,908,929.27 report=39,919,908,929.27 diff=0.00 (0.00%)",
+      "severity": "error"
+    },
+    {
+      "check": "Reconcile: by_deal_type: Loan matches independent recompute",
+      "passed": true,
+      "detail": "source=18,486,579,867.48 report=18,486,579,867.48 diff=0.00 (0.00%)",
+      "severity": "error"
+    },
+    {
+      "check": "Reconcile: by_deal_type: Deposit matches independent recompute",
+      "passed": true,
+      "detail": "source=21,433,329,061.79 report=21,433,329,061.79 diff=0.00 (0.00%)",
+      "severity": "error"
+    },
+    {
+      "check": "Reconcile: maturity_windows: next 7 days matches independent recompute",
+      "passed": true,
+      "detail": "source=0.00 report=0.00 diff=0.00 (0.00%)",
+      "severity": "error"
+    },
+    {
+      "check": "Reconcile: maturity_windows: next 30 days matches independent recompute",
+      "passed": true,
+      "detail": "source=0.00 report=0.00 diff=0.00 (0.00%)",
+      "severity": "error"
+    },
+    {
+      "check": "Reconcile: maturity_windows: next 90 days matches independent recompute",
+      "passed": true,
+      "detail": "source=0.00 report=0.00 diff=0.00 (0.00%)",
+      "severity": "error"
+    },
+    {
+      "check": "Reconcile: maturity_windows: next 365 days matches independent recompute",
+      "passed": true,
+      "detail": "source=2,701,058,543.80 report=2,701,058,543.80 diff=0.00 (0.00%)",
+      "severity": "error"
+    },
+    {
+      "check": "Maturity windows are monotonically increasing (7d <= 30d <= 90d <= 365d)",
+      "passed": true,
+      "detail": "0 / 0 / 0 / 2,701,058,544",
+      "severity": "error"
+    },
+    {
+      "check": "Reconcile: maturity_by_year: Notional sums to headline",
+      "passed": true,
+      "detail": "source=39,919,908,929.27 report=39,919,908,929.27 diff=-0.00 (0.00%)",
+      "severity": "error"
+    },
+    {
+      "check": "by_currency: exactly one currency row (EUR-only book)",
+      "passed": true,
+      "detail": "1 row(s)",
+      "severity": "error"
+    },
+    {
+      "check": "Reconcile: by_currency: Notional sums to headline",
+      "passed": true,
+      "detail": "source=39,919,908,929.27 report=39,919,908,929.27 diff=-0.00 (0.00%)",
+      "severity": "error"
+    },
+    {
+      "check": "portfolio_split: Loan + Deposit equals Total per portfolio",
+      "passed": true,
+      "detail": "",
+      "severity": "error"
+    },
+    {
+      "check": "Reconcile: portfolio_split: Total sums to headline",
+      "passed": true,
+      "detail": "source=39,919,908,929.27 report=39,919,908,929.27 diff=0.00 (0.00%)",
+      "severity": "error"
+    }
+  ]
+}

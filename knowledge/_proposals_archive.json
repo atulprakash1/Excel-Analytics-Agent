@@ -1,0 +1,302 @@
+{
+  "proposals": [
+    {
+      "id": "p-0001",
+      "type": "column",
+      "action": "add",
+      "payload": {
+        "id": "reporting_date",
+        "label": "Reporting Date",
+        "aliases": [
+          "Reporting Date"
+        ],
+        "meaning": "Single snapshot as-of date for the whole file (2026-08-01, confirmed with user as the date to bucket maturities from). Not a time series.",
+        "role": "date",
+        "type": "date",
+        "unit": null,
+        "additivity": null,
+        "scope_files": [],
+        "seen_in": [
+          "IAM_Deal_Inventory_DUMMY_2026-08-01.xlsx:IAM Deal Inventory"
+        ],
+        "source": "user",
+        "notes": ""
+      },
+      "rationale": "Confirmed in profile of IAM_Deal_Inventory_DUMMY_2026-08-01.xlsx:IAM Deal Inventory",
+      "evidence": "examples: ['2026-08-01T00:00:00']",
+      "proposed_by": "propose-from-profile",
+      "proposed_on": "2026-09-25",
+      "state": "approved",
+      "decided_by": "user",
+      "decided_on": "2026-09-25"
+    },
+    {
+      "id": "p-0002",
+      "type": "column",
+      "action": "add",
+      "payload": {
+        "id": "deal_type",
+        "label": "Deal Type",
+        "aliases": [
+          "Deal Type"
+        ],
+        "meaning": "Loan or Deposit money-market deal type.",
+        "role": "dimension",
+        "type": "text",
+        "unit": null,
+        "additivity": null,
+        "scope_files": [],
+        "seen_in": [
+          "IAM_Deal_Inventory_DUMMY_2026-08-01.xlsx:IAM Deal Inventory"
+        ],
+        "source": "user",
+        "notes": ""
+      },
+      "rationale": "Confirmed in profile of IAM_Deal_Inventory_DUMMY_2026-08-01.xlsx:IAM Deal Inventory",
+      "evidence": "examples: ['Deposit', 'Loan']",
+      "proposed_by": "propose-from-profile",
+      "proposed_on": "2026-09-25",
+      "state": "approved",
+      "decided_by": "user",
+      "decided_on": "2026-09-25"
+    },
+    {
+      "id": "p-0003",
+      "type": "column",
+      "action": "add",
+      "payload": {
+        "id": "ccy",
+        "label": "CCY",
+        "aliases": [
+          "CCY"
+        ],
+        "meaning": "ISO currency code of the deal notional. Confirmed with user: every row is EUR in this file (single-currency book), so a currency breakdown is expected to show 100% EUR, not a data issue.",
+        "role": "dimension",
+        "type": "text",
+        "unit": null,
+        "additivity": null,
+        "scope_files": [],
+        "seen_in": [
+          "IAM_Deal_Inventory_DUMMY_2026-08-01.xlsx:IAM Deal Inventory"
+        ],
+        "source": "user",
+        "notes": ""
+      },
+      "rationale": "Confirmed in profile of IAM_Deal_Inventory_DUMMY_2026-08-01.xlsx:IAM Deal Inventory",
+      "evidence": "examples: ['EUR']",
+      "proposed_by": "propose-from-profile",
+      "proposed_on": "2026-09-25",
+      "state": "approved",
+      "decided_by": "user",
+      "decided_on": "2026-09-25"
+    },
+    {
+      "id": "p-0004",
+      "type": "column",
+      "action": "add",
+      "payload": {
+        "id": "maturity_date",
+        "label": "Maturity Date",
+        "aliases": [
+          "Maturity Date"
+        ],
+        "meaning": "Contractual maturity date of the deal.",
+        "role": "date",
+        "type": "date",
+        "unit": null,
+        "additivity": null,
+        "scope_files": [],
+        "seen_in": [
+          "IAM_Deal_Inventory_DUMMY_2026-08-01.xlsx:IAM Deal Inventory"
+        ],
+        "source": "user",
+        "notes": ""
+      },
+      "rationale": "Confirmed in profile of IAM_Deal_Inventory_DUMMY_2026-08-01.xlsx:IAM Deal Inventory",
+      "evidence": "examples: ['2032-01-29T00:00:00', '2031-08-21T00:00:00', '2028-05-22T00:00:00']",
+      "proposed_by": "propose-from-profile",
+      "proposed_on": "2026-09-25",
+      "state": "approved",
+      "decided_by": "user",
+      "decided_on": "2026-09-25"
+    },
+    {
+      "id": "p-0005",
+      "type": "column",
+      "action": "add",
+      "payload": {
+        "id": "notional_in_ccy",
+        "label": "Notional in CCY",
+        "aliases": [
+          "Notional in CCY"
+        ],
+        "meaning": "Outstanding notional amount of the deal, in CCY (EUR). Confirmed with user as an outstanding stock: summed across deals at the single reporting date for totals/splits, never summed over time.",
+        "role": "measure",
+        "type": "decimal",
+        "unit": null,
+        "additivity": "semi_additive",
+        "scope_files": [],
+        "seen_in": [
+          "IAM_Deal_Inventory_DUMMY_2026-08-01.xlsx:IAM Deal Inventory"
+        ],
+        "source": "user",
+        "notes": "",
+        "semi_additive_over": "time"
+      },
+      "rationale": "Confirmed in profile of IAM_Deal_Inventory_DUMMY_2026-08-01.xlsx:IAM Deal Inventory",
+      "evidence": "examples: [31465.26, 35073.36, 36931.1]",
+      "proposed_by": "propose-from-profile",
+      "proposed_on": "2026-09-25",
+      "state": "approved",
+      "decided_by": "user",
+      "decided_on": "2026-09-25"
+    },
+    {
+      "id": "p-0006",
+      "type": "column",
+      "action": "add",
+      "payload": {
+        "id": "murex_portfolio",
+        "label": "Murex Portfolio",
+        "aliases": [
+          "Murex Portfolio"
+        ],
+        "meaning": "Book/portfolio code the deal is held in (8 distinct codes).",
+        "role": "dimension",
+        "type": "text",
+        "unit": null,
+        "additivity": null,
+        "scope_files": [],
+        "seen_in": [
+          "IAM_Deal_Inventory_DUMMY_2026-08-01.xlsx:IAM Deal Inventory"
+        ],
+        "source": "user",
+        "notes": ""
+      },
+      "rationale": "Confirmed in profile of IAM_Deal_Inventory_DUMMY_2026-08-01.xlsx:IAM Deal Inventory",
+      "evidence": "examples: ['DMOTSYFRA6392', 'DMOTSYFRA7302', 'DMOTSYFRA6391']",
+      "proposed_by": "propose-from-profile",
+      "proposed_on": "2026-09-25",
+      "state": "approved",
+      "decided_by": "user",
+      "decided_on": "2026-09-25"
+    },
+    {
+      "id": "p-0007",
+      "type": "column",
+      "action": "add",
+      "payload": {
+        "id": "rate_in",
+        "label": "Rate in %",
+        "aliases": [
+          "Rate in %"
+        ],
+        "meaning": "Deal interest rate as a percentage (not used by this report; documented for completeness).",
+        "role": "measure",
+        "type": "decimal",
+        "unit": null,
+        "additivity": "non_additive",
+        "scope_files": [],
+        "seen_in": [
+          "IAM_Deal_Inventory_DUMMY_2026-08-01.xlsx:IAM Deal Inventory"
+        ],
+        "source": "user",
+        "notes": ""
+      },
+      "rationale": "Confirmed in profile of IAM_Deal_Inventory_DUMMY_2026-08-01.xlsx:IAM Deal Inventory",
+      "evidence": "examples: [2.198, 2.221, 2.6]",
+      "proposed_by": "propose-from-profile",
+      "proposed_on": "2026-09-25",
+      "state": "approved",
+      "decided_by": "user",
+      "decided_on": "2026-09-25"
+    },
+    {
+      "id": "p-0008",
+      "type": "decision",
+      "action": "add",
+      "payload": {
+        "title": "As-of date for maturity bucketing uses the file's Reporting Date, not calendar today",
+        "decision": "When a snapshot file's single Reporting Date is earlier than the current calendar date, maturity horizons (e.g. \"next 7/30/90/365 days\") are measured from the file's Reporting Date, not from today. Confirmed with the user for IAM_Deal_Inventory_DUMMY_2026-08-01.xlsx (Reporting Date 2026-08-01, run on 2026-09-25).",
+        "applies_to": [
+          "money_market",
+          "dated snapshot files with a single Reporting Date"
+        ]
+      },
+      "rationale": "Confirmed with user while building deal_inventory_overview report",
+      "evidence": "",
+      "proposed_by": "agent",
+      "proposed_on": "2026-09-25",
+      "state": "approved",
+      "decided_by": "user",
+      "decided_on": "2026-09-25"
+    },
+    {
+      "id": "p-0009",
+      "type": "decision",
+      "action": "add",
+      "payload": {
+        "title": "\"Maturing in next N days\" means cumulative windows, not exclusive buckets",
+        "decision": "When a question asks for the total amount maturing in the next 7, 30, 90 and 365 days, each number is the cumulative total from the as-of date out to that horizon (so 30d includes everything in 7d, 90d includes everything in 30d, etc.), not a partition into non-overlapping buckets. A separate by-year or by-tenor-bucket table is used when a true partition is wanted. Confirmed with the user for deal_inventory_overview.",
+        "applies_to": [
+          "money_market",
+          "any maturity/aging report phrased as \"next N days\""
+        ]
+      },
+      "rationale": "Confirmed with user while building deal_inventory_overview report",
+      "evidence": "",
+      "proposed_by": "agent",
+      "proposed_on": "2026-09-25",
+      "state": "approved",
+      "decided_by": "user",
+      "decided_on": "2026-09-25"
+    },
+    {
+      "id": "p-0010",
+      "type": "lesson",
+      "action": "add",
+      "payload": {
+        "title": "Large-notional outliers in a deal blotter are usually real deals, not data errors",
+        "what_happened": "profile_excel.py flagged 90 \"extreme outlier\" values in Notional in CCY for IAM_Deal_Inventory_DUMMY_2026-08-01.xlsx (up to EUR 834M against a mean of EUR 39M). These were confirmed with the user as legitimate large money-market deals, not entry errors, and were kept in scope for every total.",
+        "rule": "For deal-level notional/principal columns in a money-market blotter, treat the profiler's statistical outlier flag as a prompt to ask the user, not as a signal to exclude or cap the value. Only drop or adjust a flagged value if the user confirms it is wrong.",
+        "applies_to": [
+          "money_market",
+          "notional/principal measures on deal-level extracts"
+        ]
+      },
+      "rationale": "Confirmed with user while building deal_inventory_overview report",
+      "evidence": "",
+      "proposed_by": "agent",
+      "proposed_on": "2026-09-25",
+      "state": "approved",
+      "decided_by": "user",
+      "decided_on": "2026-09-25"
+    },
+    {
+      "id": "p-0011",
+      "type": "datasource",
+      "action": "add",
+      "payload": {
+        "id": "iam_deal_inventory",
+        "pattern": "IAM_Deal_Inventory_*.xlsx",
+        "select": "last_by_name",
+        "description": "IAM money-market deal inventory: Loan and Deposit deals outstanding as of the file's Reporting Date.",
+        "owner": "Treasury / IAM desk (confirm)",
+        "frequency": "monthly (confirm)",
+        "sheets": [
+          "IAM Deal Inventory"
+        ],
+        "domains": [
+          "money_market"
+        ]
+      },
+      "rationale": "User confirmed this is a recurring monthly-style feed with a dated filename",
+      "evidence": "",
+      "proposed_by": "agent",
+      "proposed_on": "2026-09-25",
+      "state": "approved",
+      "decided_by": "user",
+      "decided_on": "2026-09-25"
+    }
+  ]
+}

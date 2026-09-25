@@ -1,0 +1,20 @@
+# Source data stays on the analyst's machine (see README "Data handling").
+# Rebuild the demo workbooks with samples/*.py.
+data/raw/*
+!data/raw/.gitkeep
+
+# Generated artefacts
+profiles/*
+!profiles/.gitkeep
+reports/*
+!reports/.gitkeep
+analysis/*/output/
+work/*
+!work/README.txt
+
+# Local tooling
+.claude/settings.local.json
+__pycache__/
+*.pyc
+.venv/
+~$*.xlsx
