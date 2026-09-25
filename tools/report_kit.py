@@ -150,6 +150,7 @@ ul.findings{padding-left:1.1rem;max-width:74ch} ul.findings li{margin:6px 0}
 ul.links{list-style:none;padding:0;max-width:74ch} ul.links li{margin:10px 0}
 ul.links a{color:var(--accent);font-weight:600;text-decoration:none} ul.links a:hover{text-decoration:underline}
 ul.links span{display:block;color:var(--muted);font-size:.9rem}
+td a{color:var(--accent);font-weight:600;text-decoration:none} td a:hover{text-decoration:underline}
 footer.rf{margin-top:48px;padding-top:16px;border-top:1px solid var(--rule);font-size:.85rem;color:var(--muted)}
 footer.rf h2{font-size:.95rem;color:var(--ink);margin:0 0 6px} footer.rf ul{margin:0 0 10px;padding-left:1.1rem}
 @media (max-width:700px){.page{margin:0;padding:28px 20px}.kpi{padding-left:12px}
@@ -295,10 +296,12 @@ class Report:
 
     # ---- tables
     def table(self, data, title: str = "", formats: dict | None = None, max_rows: int = 50,
-              total_row: bool = False, caption: str = "") -> "Report":
+              total_row: bool = False, caption: str = "", links: dict | None = None) -> "Report":
         """data: pandas DataFrame or list of dicts. formats: {column: callable}.
-        total_row=True styles the last row as a total."""
+        total_row=True styles the last row as a total.
+        links: {column: href_key} renders that column as a link to row[href_key]; href_key is not shown."""
         formats = formats or {}
+        links = links or {}
         if hasattr(data, "to_dict"):
             cols = [str(c) for c in data.columns]
             rows = data.to_dict("records")
@@ -306,6 +309,7 @@ class Report:
         else:
             rows = list(data)
             cols = list(rows[0].keys()) if rows else []
+        cols = [c for c in cols if c not in set(links.values())]
         truncated = len(rows) > max_rows
         if truncated:
             rows = rows[:max_rows]
@@ -335,7 +339,10 @@ class Report:
                     cls.append("num")
                     if isinstance(v, (int, float)) and v < 0:
                         cls.append("negv")
-                tds.append(f'<td class="{" ".join(cls)}">{_esc(s)}</td>')
+                cell = _esc(s)
+                if c in links and r.get(links[c]):
+                    cell = f'<a href="{_esc(r[links[c]])}">{cell}</a>'
+                tds.append(f'<td class="{" ".join(cls)}">{cell}</td>')
             tr_cls = ' class="total"' if total_row and ri == len(rows) - 1 else ""
             body.append(f"<tr{tr_cls}>{''.join(tds)}</tr>")
         cap = f"<figcaption>{_esc(title)}</figcaption>" if title else ""

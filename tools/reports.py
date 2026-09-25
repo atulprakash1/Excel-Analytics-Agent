@@ -250,21 +250,32 @@ def build_index() -> Path:
     stale = [m for m in ms if fr[m["report"]] != "current"]
     r.headline(f"{len(ms) - len(stale)} of {len(ms)} reports are up to date.",
                "Needs attention: " + ", ".join(m["title"] for m in stale) if stale else "Nothing needs attention.")
-    rows = []
     for m in ms:
         lr = m.get("last_run") or {}
-        rows.append({"Report": m["title"], "Status": fr[m["report"]].split(":")[0],
-                     "Last run": (lr.get("at") or "never")[:16].replace("T", " "),
-                     "Review": m["review_level"], "Schedule": m["schedule"],
-                     "Inputs": ", ".join(f"{i.get('source') or i.get('profile')}/{i['sheet']}" for i in m["inputs"])})
-    r.section("Reports")
-    r.table(rows)
+        inputs = ", ".join(f"{i.get('source') or i.get('profile')}/{i['sheet']}" for i in m["inputs"])
+        r.section(m["title"], f"{m.get('question', '')} Inputs: {inputs}. Review: {m['review_level']}. "
+                              f"Schedule: {m['schedule']}.")
+        status = fr[m["report"]].split(":")[0]
+        snap = re.compile(rf"^{re.escape(m['report'])}_(\d{{4}}-\d{{2}}-\d{{2}})\.html$")
+        snaps = sorted(((mt.group(1), p) for p in (ROOT / "reports").glob(f"{m['report']}_*.html")
+                        if (mt := snap.match(p.name))), reverse=True)
+        rows = [{"Report": f"{m['title']} – {as_of}", "href": p.name, "As of": as_of,
+                 "Status": status if i == 0 else "snapshot",
+                 "Last run": datetime.fromtimestamp(p.stat().st_mtime).strftime("%Y-%m-%d %H:%M")}
+                for i, (as_of, p) in enumerate(snaps)]
+        if not rows and (ROOT / m["outputs"]["html"]).exists():
+            # reports built before dated snapshots existed only have the undated file
+            rows.append({"Report": m["title"], "href": Path(m["outputs"]["html"]).name,
+                         "As of": (lr.get("kpis") or {}).get("as_of", "–"), "Status": status,
+                         "Last run": (lr.get("at") or "never")[:16].replace("T", " ")})
+        if rows:
+            r.table(rows, links={"Report": "href"})
+        else:
+            r.text("Not built yet.")
     details = [f"{m['title']}: {fr[m['report']]}" for m in stale if ":" in fr[m["report"]]]
     if details:
         r.section("Why reports are blocked", "Resolve these with the Profiler agent, then refresh.")
         r.findings(details)
-    r.section("Open a report")
-    r.links([(m["title"], f"{m['report']}.html", m.get("question", "")) for m in ms])
     return r.save(ROOT / "reports" / "index.html")
 
 
