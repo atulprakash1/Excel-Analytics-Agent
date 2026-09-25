@@ -22,33 +22,114 @@
   ],
   "created": "2026-09-25",
   "last_run": {
-    "at": "2026-09-25T14:34:13",
+    "at": "2026-09-25T19:22:46",
     "status": "success",
     "inputs": [
       {
         "source": "iam_deal_inventory",
         "sheet": "IAM Deal Inventory",
-        "file": "IAM_Deal_Inventory_DUMMY_2026-08-01.xlsx",
-        "sha256": "7e7fc9225d41b0b48ad122d79933991d694574fd396e2fcf8bba288b7c615e2b"
+        "file": "IAM_Deal_Inventory_DUMMY_2026-08-02.xlsx",
+        "sha256": "51aee4476cfa49e435616cca22b5ed66563fc7091efdc51d6a56c34d535292e0"
       }
     ],
     "kpis": {
-      "notional_in_ccy": 39919908929.270004,
-      "as_of": "2026-08-01",
-      "rows_in_scope": 1019,
+      "notional_in_ccy": 39937444813.009995,
+      "as_of": "2026-08-02",
+      "rows_in_scope": 1022,
       "currency": "EUR",
-      "total_loan": 18486579867.48,
-      "total_deposit": 21433329061.79,
+      "total_loan": 18493700831.59,
+      "total_deposit": 21443743981.420002,
       "maturing_next_7d": 0.0,
       "maturing_next_30d": 0.0,
       "maturing_next_90d": 0.0,
-      "maturing_next_365d": 2701058543.8000007
+      "maturing_next_365d": 2701019343.4200006
     },
     "validation": "28/28 passed (full)",
-    "seconds": 6.3,
+    "seconds": 8.0,
     "note": "Done: reports/deal_inventory_overview.html"
   },
   "history": [
+    {
+      "at": "2026-09-25T19:22:46",
+      "status": "success",
+      "inputs": [
+        {
+          "source": "iam_deal_inventory",
+          "sheet": "IAM Deal Inventory",
+          "file": "IAM_Deal_Inventory_DUMMY_2026-08-02.xlsx",
+          "sha256": "51aee4476cfa49e435616cca22b5ed66563fc7091efdc51d6a56c34d535292e0"
+        }
+      ],
+      "kpis": {
+        "notional_in_ccy": 39937444813.009995,
+        "as_of": "2026-08-02",
+        "rows_in_scope": 1022,
+        "currency": "EUR",
+        "total_loan": 18493700831.59,
+        "total_deposit": 21443743981.420002,
+        "maturing_next_7d": 0.0,
+        "maturing_next_30d": 0.0,
+        "maturing_next_90d": 0.0,
+        "maturing_next_365d": 2701019343.4200006
+      },
+      "validation": "28/28 passed (full)",
+      "seconds": 8.0,
+      "note": "Done: reports/deal_inventory_overview.html"
+    },
+    {
+      "at": "2026-09-25T19:16:17",
+      "status": "success",
+      "inputs": [
+        {
+          "source": "iam_deal_inventory",
+          "sheet": "IAM Deal Inventory",
+          "file": "IAM_Deal_Inventory_DUMMY_2026-08-02.xlsx",
+          "sha256": "51aee4476cfa49e435616cca22b5ed66563fc7091efdc51d6a56c34d535292e0"
+        }
+      ],
+      "kpis": {
+        "notional_in_ccy": 39937444813.009995,
+        "as_of": "2026-08-02",
+        "rows_in_scope": 1022,
+        "currency": "EUR",
+        "total_loan": 18493700831.59,
+        "total_deposit": 21443743981.420002,
+        "maturing_next_7d": 0.0,
+        "maturing_next_30d": 0.0,
+        "maturing_next_90d": 0.0,
+        "maturing_next_365d": 2701019343.4200006
+      },
+      "validation": "28/28 passed (full)",
+      "seconds": 7.9,
+      "note": "Done: reports/deal_inventory_overview.html"
+    },
+    {
+      "at": "2026-09-25T14:50:32",
+      "status": "success",
+      "inputs": [
+        {
+          "source": "iam_deal_inventory",
+          "sheet": "IAM Deal Inventory",
+          "file": "IAM_Deal_Inventory_DUMMY_2026-08-01.xlsx",
+          "sha256": "7e7fc9225d41b0b48ad122d79933991d694574fd396e2fcf8bba288b7c615e2b"
+        }
+      ],
+      "kpis": {
+        "notional_in_ccy": 39919908929.270004,
+        "as_of": "2026-08-01",
+        "rows_in_scope": 1019,
+        "currency": "EUR",
+        "total_loan": 18486579867.48,
+        "total_deposit": 21433329061.79,
+        "maturing_next_7d": 0.0,
+        "maturing_next_30d": 0.0,
+        "maturing_next_90d": 0.0,
+        "maturing_next_365d": 2701058543.8000007
+      },
+      "validation": "28/28 passed (full)",
+      "seconds": 6.5,
+      "note": "Done: reports/deal_inventory_overview.html"
+    },
     {
       "at": "2026-09-25T14:34:13",
       "status": "success",

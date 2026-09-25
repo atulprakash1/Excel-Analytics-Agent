@@ -1,7 +1,7 @@
 {
   "report": "deal_inventory_overview",
   "review_level": "full",
-  "validated_at": "2026-09-25T14:34:12",
+  "validated_at": "2026-09-25T19:22:45",
   "passed": true,
   "n_checks": 28,
   "n_failed": 0,
@@ -9,19 +9,19 @@
     {
       "check": "Stock measure taken at a single as-of date",
       "passed": true,
-      "detail": "as_of=2026-08-01",
+      "detail": "as_of=2026-08-02",
       "severity": "error"
     },
     {
-      "check": "Reconcile: Headline notional_in_ccy at 2026-08-01 vs independent recompute",
+      "check": "Reconcile: Headline notional_in_ccy at 2026-08-02 vs independent recompute",
       "passed": true,
-      "detail": "source=39,919,908,929.27 report=39,919,908,929.27 diff=0.00 (0.00%)",
+      "detail": "source=39,937,444,813.01 report=39,937,444,813.01 diff=0.00 (0.00%)",
       "severity": "error"
     },
     {
       "check": "Row count: Rows at the as-of date",
       "passed": true,
-      "detail": "expected=1019 actual=1019",
+      "detail": "expected=1022 actual=1022",
       "severity": "error"
     },
     {
@@ -99,19 +99,19 @@
     {
       "check": "Reconcile: by_deal_type: Notional sums to headline",
       "passed": true,
-      "detail": "source=39,919,908,929.27 report=39,919,908,929.27 diff=0.00 (0.00%)",
+      "detail": "source=39,937,444,813.01 report=39,937,444,813.01 diff=0.00 (0.00%)",
       "severity": "error"
     },
     {
       "check": "Reconcile: by_deal_type: Loan matches independent recompute",
       "passed": true,
-      "detail": "source=18,486,579,867.48 report=18,486,579,867.48 diff=0.00 (0.00%)",
+      "detail": "source=18,493,700,831.59 report=18,493,700,831.59 diff=0.00 (0.00%)",
       "severity": "error"
     },
     {
       "check": "Reconcile: by_deal_type: Deposit matches independent recompute",
       "passed": true,
-      "detail": "source=21,433,329,061.79 report=21,433,329,061.79 diff=0.00 (0.00%)",
+      "detail": "source=21,443,743,981.42 report=21,443,743,981.42 diff=0.00 (0.00%)",
       "severity": "error"
     },
     {
@@ -135,19 +135,19 @@
     {
       "check": "Reconcile: maturity_windows: next 365 days matches independent recompute",
       "passed": true,
-      "detail": "source=2,701,058,543.80 report=2,701,058,543.80 diff=0.00 (0.00%)",
+      "detail": "source=2,701,019,343.42 report=2,701,019,343.42 diff=0.00 (0.00%)",
       "severity": "error"
     },
     {
       "check": "Maturity windows are monotonically increasing (7d <= 30d <= 90d <= 365d)",
       "passed": true,
-      "detail": "0 / 0 / 0 / 2,701,058,544",
+      "detail": "0 / 0 / 0 / 2,701,019,343",
       "severity": "error"
     },
     {
       "check": "Reconcile: maturity_by_year: Notional sums to headline",
       "passed": true,
-      "detail": "source=39,919,908,929.27 report=39,919,908,929.27 diff=-0.00 (0.00%)",
+      "detail": "source=39,937,444,813.01 report=39,937,444,813.01 diff=0.00 (0.00%)",
       "severity": "error"
     },
     {
@@ -159,7 +159,7 @@
     {
       "check": "Reconcile: by_currency: Notional sums to headline",
       "passed": true,
-      "detail": "source=39,919,908,929.27 report=39,919,908,929.27 diff=-0.00 (0.00%)",
+      "detail": "source=39,937,444,813.01 report=39,937,444,813.01 diff=0.00 (0.00%)",
       "severity": "error"
     },
     {
@@ -171,7 +171,7 @@
     {
       "check": "Reconcile: portfolio_split: Total sums to headline",
       "passed": true,
-      "detail": "source=39,919,908,929.27 report=39,919,908,929.27 diff=0.00 (0.00%)",
+      "detail": "source=39,937,444,813.01 report=39,937,444,813.01 diff=0.00 (0.00%)",
       "severity": "error"
     }
   ]
