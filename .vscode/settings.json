@@ -1,12 +1,16 @@
 {
-  // Fast path: let agents run this workspace's own Python scripts without a confirmation click.
+  // Let agents run this workspace's own Python scripts (tools/, analysis/<report>/, samples/)
+  // without a confirmation click. Covers: python / python3 / py, a full or quoted interpreter
+  // path (incl. PowerShell "& "C:\...\python.exe""), .venv interpreters, flags like -u,
+  // / or \ paths, and a trailing 2>&1. Still prompts for: chained commands (; && |),
+  // redirects to files (>), "..", python -c, and scripts anywhere else (e.g. work/).
   // Setting names can change between VS Code versions. If this has no effect, search
   // Settings for "terminal auto approve" and add the same patterns there.
   "chat.tools.terminal.autoApprove": {
-    "/^(?!.*\\.\\.)(?!.*[;&|`>])(python3?|py)\\s+(tools|analysis|samples)[\\\\/][\\w\\\\/.-]+\\.py(\\s|$)/": true,
+    "/^(?!.*\\.\\.)(?!.*[;|`])(?!.*&&)(?!.*>(?!&1))(&\\s*)?(\"[A-Za-z]:[\\\\/][^\"]*[\\\\/](python3?|py)(\\.exe)?\"|([A-Za-z]:[\\\\/][\\w\\\\/.-]*[\\\\/]|\\.?venv[\\\\/](Scripts|bin)[\\\\/])?(python3?|py)(\\.exe)?)(\\s+-[uBIX]\\S*)*\\s+\"?(\\.[\\\\/])?(tools|analysis|samples)[\\\\/][\\w\\\\/.-]+\\.py\"?(\\s|$)/": true,
     // Knowledge changes always need a human click, even though the rule above matches.
-    "/^(python3?|py)\\s+tools[\\\\/]knowledge\\.py\\s+(approve|reject|deprecate)\\b/": false,
+    "/\\btools[\\\\/]knowledge\\.py\"?\\s+(approve|reject|deprecate)\\b/": false,
     // Resetting the workspace is always a person's decision.
-    "/^(python3?|py)\\s+tools[\\\\/]reset_workspace\\.py\\b/": false
+    "/\\btools[\\\\/]reset_workspace\\.py\\b/": false
   }
 }
