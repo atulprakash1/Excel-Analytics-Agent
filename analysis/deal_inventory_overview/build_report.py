@@ -98,4 +98,6 @@ r.methodology(
             else "Not yet checked")],
     validated=bool(val and val["passed"]), notes=NOTES,
     review=(val or {}).get("review_level", "full"))
-print(f"Report written to {r.save(ROOT / 'reports' / (REPORT + '.html'))}")
+canonical = r.save(ROOT / "reports" / (REPORT + ".html"))
+snapshot = r.save(ROOT / "reports" / f"{REPORT}_{k['as_of']}.html")
+print(f"Report written to {canonical} (snapshot preserved at {snapshot})")
