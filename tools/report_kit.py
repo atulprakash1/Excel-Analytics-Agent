@@ -3,7 +3,7 @@ report_kit.py - build polished, self-contained HTML reports with no extra librar
 
 Only the Python standard library is required (pandas is optional: `table()` accepts a
 DataFrame or a list of dicts). Charts are rendered as inline SVG, so the output is a
-single .html file that opens offline, prints cleanly and follows light/dark mode.
+single .html file that opens offline, prints cleanly and always renders in light mode.
 
 Typical use (from a build_report.py script):
 
@@ -90,17 +90,11 @@ def _nice_ticks(lo: float, hi: float, n: int = 4) -> list[float]:
 
 CSS = """
 :root{
+  color-scheme: light;
   --canvas:#e9edf1; --paper:#ffffff; --ink:#1c2733; --muted:#5b6b7a; --rule:#d5dbe1;
   --accent:#0e6e6b; --accent-soft:#e2f0ef; --pos:#2f7d4f; --neg:#b43c3c; --warn:#9a6412;
   --s0:#0e6e6b; --s1:#b7791f; --s2:#4a6fa5; --s3:#8a5a83; --s4:#6b7d2a;
   --zebra:#f5f7f9; --font: "Segoe UI", system-ui, -apple-system, Roboto, "Helvetica Neue", Arial, sans-serif;
-}
-@media (prefers-color-scheme: dark){
-  :root:not([data-theme="light"]){
-    --canvas:#0f141a; --paper:#18202a; --ink:#e4e9ee; --muted:#98a6b4; --rule:#2c3845;
-    --accent:#4fb3ad; --accent-soft:#16312f; --pos:#6cc08f; --neg:#e07b7b; --warn:#d9a95a;
-    --s0:#4fb3ad; --s1:#e0a94f; --s2:#86a8dc; --s3:#c595bd; --s4:#a9bd63; --zebra:#1d2631;
-  }
 }
 *{box-sizing:border-box}
 html{-webkit-text-size-adjust:100%}
@@ -390,6 +384,7 @@ class Report:
         return (
             '<!doctype html><html lang="en"><head><meta charset="utf-8">'
             '<meta name="viewport" content="width=device-width, initial-scale=1">'
+            '<meta name="color-scheme" content="light">'
             f"<title>{_esc(self.title)}</title><style>{CSS}</style></head><body>"
             f'<main class="page"><header class="rh"><h1>{_esc(self.title)}</h1>{sub}<dl>{meta_html}</dl></header>'
             f'<section class="rs">{body}</section>{self._footer}</main></body></html>')
