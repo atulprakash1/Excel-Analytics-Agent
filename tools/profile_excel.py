@@ -21,6 +21,7 @@ Usage:
   python tools/profile_excel.py data/raw/<file>.xlsx # one file
   python tools/profile_excel.py --force
   python tools/profile_excel.py --html-only          # re-render HTML after editing annotations
+  python tools/profile_excel.py --quiet              # one status line per file (after approving knowledge)
   python tools/profile_excel.py data/raw/<file> --prefill
       # also draft the mechanical annotations of an unconfirmed profile: roles (suggested_role),
       # additivity guessed from column names, cleaning rules, a draft grain, single-value columns,
@@ -466,6 +467,7 @@ def empty_annotations(sheets: list[dict]) -> dict:
             "column_roles": {},       # column -> dimension|measure|date|identifier|attribute|unused
             "column_meanings": {},    # column -> business meaning, units, currency, VAT etc.
             "column_additivity": {},  # measure -> additive | semi_additive over <dim> | non_additive
+            "column_units": {},       # measure -> unit, e.g. "EUR", "%", "bp", "days" (goes into the catalog)
             "prefilled_from_catalog": {},  # column -> catalog id (filled automatically from knowledge/)
             "cleaning_rules": [],     # confirmed rules (copied/edited from suggested_cleaning_rules)
         } for s in sheets},
@@ -473,6 +475,9 @@ def empty_annotations(sheets: list[dict]) -> dict:
         "feasible_analyses": [],
         "not_feasible": [],           # e.g. "Margin - no cost data"
         "open_questions": [],
+        # answered questions move here instead of being deleted, so the Curator can turn them into
+        # decisions without the chat: {"question", "answer", "by", "on": "YYYY-MM-DD"}
+        "answers": [],
     }
 
 
@@ -620,6 +625,11 @@ def write_profile_html(profile: dict, out: Path):
     if qs:
         r.section("Open questions for the business")
         r.findings(qs)
+    answered = profile["annotations"].get("answers", [])
+    if answered:
+        r.section("Questions answered", "What the business confirmed about this file.")
+        r.findings(f"{a.get('question', '')} - {a.get('answer', '')} ({a.get('by') or 'unknown'}, {a.get('on') or 'undated'})"
+                   for a in answered)
     r.methodology([f"Profiled {src['profiled_at'][:16].replace('T', ' ')} with tools/profile_excel.py",
                    f"File hash {src['sha256'][:12]}, structure signature {src['structure_signature']}"])
     r.save(out)
@@ -796,6 +806,7 @@ def main():
     ap.add_argument("--html-only", action="store_true", help="re-render HTML from existing profiles")
     ap.add_argument("--prefill", action="store_true",
                     help="draft roles, additivity, cleaning rules, grain and open questions in unconfirmed profiles")
+    ap.add_argument("--quiet", action="store_true", help="one status line per file (issues are in the profile)")
     args = ap.parse_args()
     if args.html_only:
         for pj in sorted(PROFILE_DIR.glob("*.profile.json")):
@@ -814,6 +825,9 @@ def main():
             continue
         p, status = profile_file(f, args.force)
         profiles.append(p)
+        if args.quiet and not args.prefill:
+            print(f"{f.name}: {status}")
+            continue
         print(f"\n== {f.name}: {status}")
         if args.prefill:
             for line in prefill_annotations(p):
@@ -844,6 +858,8 @@ def main():
                     if not p["source"].get("logical_sources") or p["source"]["file"] in current]
     rels = find_relationships(all_profiles)
     (PROFILE_DIR / "_relationships.json").write_text(json.dumps(rels, indent=2), encoding="utf-8")
+    if args.quiet:
+        return
     print(f"\nCandidate relationships: {len(rels)}")
     for r in rels[:5]:
         print(f"  {r['left']['file']}:{r['left']['sheet']}.{r['left']['column']} <-> "

@@ -30,6 +30,7 @@ Two kinds of knowledge live here:
 ## Commands
 ```
 python tools/knowledge.py status | pending | lint | sources
+python tools/knowledge.py brief [<report>]         # what a run confirmed, in one short text
 python tools/knowledge.py lookup "<column name>"
 python tools/domains.py list | suggest <profile> | set <profile> <packs...> | validate
 python tools/reports.py uses <file or source>

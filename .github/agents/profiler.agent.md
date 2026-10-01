@@ -36,16 +36,20 @@ Skills: `data-profiling` (procedure), `domain-packs` (choosing packs), `knowledg
    contradicts them. Focus on `unknown_columns` and `ambiguous` matches, using the pack's
    "Typical data" table to suggest meanings and additivity.
 5. Review the drafted `annotations.sheets.<sheet>` and add what only a person-facing reading
-   gives: `description`, `column_meanings` (units, currency, sign), and corrections to drafted
-   roles (e.g. numeric codes drafted as measures) and additivity.
+   gives: `description`, `column_meanings` (units, currency, sign), `column_units` for measures
+   (`"EUR"`, `"%"`, `"bp"`), and corrections to drafted roles (e.g. numeric codes drafted as
+   measures) and additivity.
 6. Fill `feasible_analyses` and `not_feasible`; record joins from `profiles/_relationships.json`.
 7. Verify: `python tools/load_data.py <profile or source> <sheet>`; row counts must make sense.
 8. Ask everything in ONE round: `open_questions` (drop any the knowledge base or the data already
    answers), the pack's "Questions to ask" that apply, unknown/ambiguous columns, and rules marked
    `needs_confirmation`. State your inference for each ("CCY is EUR only - single-currency book?")
    so the user can answer with "yes" to most. Always include the "recurring?" question if drafted.
-9. When answered: update annotations, clear answered `open_questions`, set `status: confirmed`,
-   `confirmed_by`, `confirmed_on`, and `python tools/profile_excel.py --html-only`.
+9. When answered: update annotations, and **move** each answered question from `open_questions`
+   to `answers` as `{"question", "answer", "by", "on": "YYYY-MM-DD"}` - record answers to your own
+   questions too. Never just delete them: the Curator turns `answers` into decisions without
+   re-reading this chat. Then set `status: confirmed`, `confirmed_by`, `confirmed_on`, and
+   `python tools/profile_excel.py --html-only`.
 10. Recurring file: propose its logical source (`datasource`, including `domains`) and, once
     approved, hand over the **source id** - reports must be scaffolded with
     `--source <source_id>:<sheet>`, never the dated profile name, so no rework is needed later.

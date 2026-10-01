@@ -37,9 +37,11 @@ packs (`domain-packs` skill).
 | `sheets.<s>.column_roles` | `dimension`, `measure`, `date`, `identifier`, `attribute`, `unused` |
 | `sheets.<s>.column_meanings` | Units, currency, sign convention, rate format (% / decimal / bp), date meaning |
 | `sheets.<s>.column_additivity` | Every measure: `additive` (flows), `semi_additive over time` (balances, positions, outstanding), `non_additive` (rates, ratios, prices) |
+| `sheets.<s>.column_units` | Every measure's unit: `"EUR"`, `"%"`, `"bp"`, `"days"` (carried into the catalog) |
 | `sheets.<s>.cleaning_rules` | Reviewed copy of `suggested_cleaning_rules` |
 | `feasible_analyses` / `not_feasible` | What the data supports, and what it can't (e.g. "group total - no FX rates") |
 | `open_questions` | Anything a human must confirm |
+| `answers` | Each answered question, moved here (never deleted): `{"question", "answer", "by", "on"}`. The Curator proposes decisions from these |
 
 Grain test: the identifier columns (plus the date for daily stocks) are unique after cleaning.
 
@@ -69,6 +71,7 @@ Ops: `drop_blank_rows`, `drop_rows_matching`, `drop_columns`, `strip_whitespace`
 - [ ] Unknown / ambiguous columns resolved with the user
 - [ ] `python tools/load_data.py <profile> <sheet>` runs; row counts explained
 - [ ] Grain uniqueness holds
-- [ ] All `needs_confirmation` rules confirmed or removed; open questions answered or accepted
+- [ ] All `needs_confirmation` rules confirmed or removed; open questions answered or accepted,
+      and every answer recorded under `answers`
 - [ ] Recurring or one-off answered; a recurring file has a logical source BEFORE any report is scaffolded
 - [ ] HTML re-rendered

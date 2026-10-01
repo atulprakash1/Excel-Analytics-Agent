@@ -43,6 +43,7 @@ python tools/run_pipeline.py <report>              # analysis -> checks -> repor
 python tools/reports.py list | uses <file> | check | refresh-all <source>
 python tools/fast_path_check.py <source|profile>   # is a one-pass quick report allowed?
 python tools/knowledge.py status | pending | lint | sources
+python tools/knowledge.py brief [<report>]         # what a run confirmed, in one short text (read this, not the files)
 python tools/domains.py validate                   # after editing a domain pack
 ```
 "Tests" for this repo: a report is done only when `run_pipeline.py` finishes with all checks
