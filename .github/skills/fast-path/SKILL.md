@@ -44,6 +44,8 @@ Treasury-aware defaults from the profile:
   column = label or date, measure column named as printed by the scaffold, `Share` where useful.
 - `checks.py`: the same filters written differently; checks for joins, applicable lessons and pack checks.
 - `build_report.py`: HEADLINE / DETAIL built from `k[...]` and `tables[...]`, KPIs, section titles, NOTES.
+  Each table gets a chart chosen from its shape; set `CHARTS["<table>"]` only when the question
+  needs another kind (see the `html-report` skill, "Chart choice"), and list bucket tables in `ORDERED`.
 
 ## Fallback
 Gate fails -> full flow. Checks fail twice, or the failure is about the data -> "Promote to full review".
