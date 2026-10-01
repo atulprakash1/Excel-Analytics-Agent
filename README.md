@@ -35,7 +35,7 @@ Curator ───► proposals → (you approve) → knowledge/   (and suggested
 | `tools/profile_excel.py` | Profiler: structure, types, quality, drift, joins, catalog matches, domain suggestions |
 | `tools/domains.py` | Rank, record and validate domain packs |
 | `tools/load_data.py` | The only data loader (`load_source` / `load_sheet`) with confirmed cleaning rules |
-| `tools/knowledge.py` | Catalog matching, logical sources, proposals, approval, lint |
+| `tools/knowledge.py` | Catalog matching, logical sources, curation brief, proposals, approval, lint |
 | `tools/scaffold_report.py` | Writes a report's four files, Treasury-aware (stocks, rates, currencies) |
 | `tools/validate.py` | Validation helper |
 | `tools/report_kit.py` | Dependency-free HTML reports with inline SVG charts |
@@ -115,6 +115,8 @@ stored as text, cancelled deals, a wide tenor-bucket gap report with subtotal ro
   pre-filled, so the Profiler only asks about new ones.
 - The Analyst takes definitions from `knowledge/glossary.md` (or a pack's starter definition marked NEW).
 - The Reviewer checks against the glossary, decisions, lessons and the packs' checks.
+- The Curator works from `python tools/knowledge.py brief <report>` - one short text of what the run
+  confirmed - instead of re-reading the profiles, plan, review and knowledge files.
 - The Curator proposes what was confirmed; nothing enters memory without your approval
   (`python tools/knowledge.py pending | approve <ids> --by "<name>"`). Every change is logged.
 
